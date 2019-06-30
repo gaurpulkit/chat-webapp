@@ -15,13 +15,13 @@ function send(message){
 }
 
 socket.on('chat', function(data){
-  $('#recv').append($('<li>').text(data.message + "    ----"+data.user));
+  $('#recv').append($('<li>').text(data.message + "       --"+data.user));
 })
 
 socket.on('new',function(user){
   // console.log(user)
   // console.log($("#new").html())
-  $('#new').html(user.name+" connected!")
+  $('#new').html(user.name+" Connected!")
   // console.log($("#new").html())
   $('#new').show();
   setTimeout(() => {
@@ -29,7 +29,8 @@ socket.on('new',function(user){
   }, 5000);
 })
 
-socket.on('gone',function(){
+socket.on('gone',function(user){
+  $('#gone').html(user.name+" Disconnected!")
   $('#gone').show();
   setTimeout(() => {
   $('#gone').hide();    

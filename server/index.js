@@ -5,22 +5,20 @@ var userData=[]
 io.on('connection',function(socket){
     console.log("New connection from socketId=",socket.id)
     socket.on('message',function(msg){
-        console.log("userdata=",userData)
-        console.log(socket.id)
         let obj = userData.find(o => o.userId == socket.id);
-        console.log(obj)
         if(obj)
         io.emit('chat',{message:msg,user:obj.name})
     })
     socket.on('disconnect',function(){
-        io.emit('gone')
+        let obj = userData.find(o => o.userId == socket.id);
+        if(obj)
+        io.emit('gone',obj)
     })
     socket.on('typing',function(){
         io.emit('typing')
     })
     socket.on('setUser',function(data){
         userData.push(data)
-        console.log(data,userData)
         io.emit('new',data)
     })
 })
