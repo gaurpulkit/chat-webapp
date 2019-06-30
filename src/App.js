@@ -37,7 +37,8 @@ socket.on('gone',function(user){
   }, 5000);
 })
 
-socket.on('typing',function(){
+socket.on('typing',function(user){
+  $('#typing').html(user.name+" is typing!")
   $('#typing').show();
   clearTimeout(timeOut);
   timeOut=setTimeout(() => {

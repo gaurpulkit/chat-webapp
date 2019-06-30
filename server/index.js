@@ -15,7 +15,9 @@ io.on('connection',function(socket){
         io.emit('gone',obj)
     })
     socket.on('typing',function(){
-        io.emit('typing')
+        let obj = userData.find(o => o.userId == socket.id);
+        if(obj)
+        io.emit('typing',obj)
     })
     socket.on('setUser',function(data){
         userData.push(data)
