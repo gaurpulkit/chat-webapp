@@ -2,39 +2,41 @@
 import React from 'react';
 import './App.css';
 import $ from 'jquery';
+import { ChatBox } from './components/ChatBox';
 const io=require('socket.io-client')
-const socket=io.connect('http://localhost:4368')
+const socket=io.connect('192.168.43.13:4368')
 
-function handleClick(event){
-  event.preventDefault();
+function send(message){
   console.log("sent message")
-  socket.emit('message',$("#send").val());
-  $("#send").val('')
-  
+  socket.emit('message',message);
 }
 
-socket.on('message', function(msg){
+socket.on('chat', function(msg){
   $('#recv').append($('<li>').text(msg));
 })
 
 
 
-function App() {
-  return (
-    <div className="Chat App">
-      <header className="App-header">
-        <ul id="recv">
+class App extends React.Component {
+  constructor (props){
+    super(props);
+    this.handleClick=this.handleClick.bind(this)
+  }
+  handleClick(message){
+    send(message)
+  }
+  render(){
+    return (
+      <div className="Chat App">
+        <header className="App-header">
+          <ul id="recv">
 
-        </ul>
-        <div>
-          <form>
-            <input id="send" style={{margin:"20px"}} type="text" placeholder="type here..."/>
-            <button onClick={handleClick}>Submit</button>
-          </form>
-        </div>
-      </header>
-    </div>
-  );
+          </ul>
+          <ChatBox handleClick={this.handleClick}/>
+        </header>
+      </div>
+    );
+  }
 }
 
 export default App;

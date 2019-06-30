@@ -4,7 +4,7 @@ const io=require('socket.io')(http);
 io.on('connection',function(socket){
     console.log("New Connection!");
     socket.on('message',function(msg){
-        io.emit('message',msg)
+        io.emit('chat',msg)
     })
     socket.on('disconnect',function(){
         console.log("Disconnected!");
