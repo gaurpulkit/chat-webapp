@@ -3,6 +3,7 @@ import React from 'react';
 import './App.css';
 import $ from 'jquery';
 import { ChatBox } from './components/ChatBox';
+import  Header  from './components/Header';
 const io=require('socket.io-client')
 const socket=io.connect('192.168.43.13:4368')
 
@@ -19,7 +20,14 @@ socket.on('new',function(){
   $('#new').show();
   setTimeout(() => {
   $('#new').hide();    
-  }, 10000);
+  }, 5000);
+})
+
+socket.on('gone',function(){
+  $('#gone').show();
+  setTimeout(() => {
+  $('#gone').hide();    
+  }, 5000);
 })
 
 
@@ -31,12 +39,18 @@ class App extends React.Component {
   handleClick(message){
     send(message)
   }
+  componentDidMount(){
+  $('#new').hide();    
+  $('#gone').hide();    
+  }
   render(){
     return (
       <div className="Chat App">
+      <Header/> 
         <header className="App-header">
           <div>
              <h6 id="new" style={{color:"green"}}>New user connected!</h6>
+             <h6 id="gone" style={{color:"red"}}>User Disconnected!</h6>
           </div>
           <ul id="recv">
 
