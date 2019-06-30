@@ -13,6 +13,7 @@ export class ChatBox extends React.Component{
         this.setState({
             value:e.target.value
         })
+        this.props.typing();
     }
 
     handleClick(event){

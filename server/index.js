@@ -9,6 +9,9 @@ io.on('connection',function(socket){
     socket.on('disconnect',function(){
         io.emit('gone')
     })
+    socket.on('typing',function(){
+        io.emit('typing')
+    })
 })
 
 http.listen(4368,function(req){
