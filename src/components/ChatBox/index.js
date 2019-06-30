@@ -28,7 +28,7 @@ export class ChatBox extends React.Component{
         return(
         <div>
           <form>
-            <input id="send" value={this.state.value} onChange={this.handleChange} type="text" placeholder="type here..."/>
+            <input id="send" autofocus="autofocus" value={this.state.value} onChange={this.handleChange} type="text" placeholder="type here..."/>
             <button onClick={this.handleClick}>Submit</button>
           </form>
         </div>
