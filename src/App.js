@@ -15,6 +15,12 @@ socket.on('chat', function(msg){
   $('#recv').append($('<li>').text(msg));
 })
 
+socket.on('new',function(){
+  $('#new').show();
+  setTimeout(() => {
+  $('#new').hide();    
+  }, 10000);
+})
 
 
 class App extends React.Component {
@@ -29,6 +35,9 @@ class App extends React.Component {
     return (
       <div className="Chat App">
         <header className="App-header">
+          <div>
+             <h6 id="new" style={{color:"green"}}>New user connected!</h6>
+          </div>
           <ul id="recv">
 
           </ul>

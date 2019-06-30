@@ -3,6 +3,7 @@ const io=require('socket.io')(http);
 
 io.on('connection',function(socket){
     console.log("New Connection!");
+    io.emit('new');
     socket.on('message',function(msg){
         io.emit('chat',msg)
     })
