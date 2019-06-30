@@ -4,7 +4,7 @@ export default class Header extends React.Component{
     render(){
         return(
         <div>
-          <h3 style={{color:"black",backgroundColor:"green"}}>Chat App</h3>
+          <h3 style={{color:"blue"}}>Chat App</h3>
         </div>
         )
     }

@@ -46,8 +46,8 @@ class App extends React.Component {
   render(){
     return (
       <div className="Chat App">
-      <Header/> 
         <header className="App-header">
+        <Header/> 
           <div>
              <h6 id="new" style={{color:"green"}}>New user connected!</h6>
              <h6 id="gone" style={{color:"red"}}>User Disconnected!</h6>
