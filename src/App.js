@@ -10,12 +10,12 @@ const socket=io.connect('localhost:4368')
 
 var timeOut;
 function send(message){
-  console.log("sent message")
+  // console.log("sent message")
   socket.emit('message',message);
 }
 
-socket.on('chat', function(msg){
-  $('#recv').append($('<li>').text(msg));
+socket.on('chat', function(data){
+  $('#recv').append($('<li>').text(data.message + "    ----"+data.user));
 })
 
 socket.on('new',function(user){
