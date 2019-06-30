@@ -6,9 +6,11 @@ import  Header  from './components/Header';
 import  Login  from './components/Login';
 const io=require('socket.io-client')
 const socket=io.connect('192.168.43.13:4368')
-
-
+var messageCount=0;
 var timeOut;
+
+
+// To send message to server
 function send(message){
   // console.log("sent message")
   if (message.replace(/\s/g, '').length) {
@@ -16,10 +18,17 @@ function send(message){
   }
 }
 
-socket.on('chat', function(data){
-  $('#recv').append($('<li>').text(data.message + "       --"+data.user));
+// To show messages
+socket.on('chat', function(data){    
+  messageCount+=1
+  $('#recv').append("<p id=msg"+messageCount+">"+data.message+"  --"+data.user+"</p>");
+  var remv="#msg"+messageCount;
+  setTimeout(function(){
+    $(remv).remove();
+  }, 10000);
 })
 
+// To get notified on new connection
 socket.on('new',function(user){
   // console.log(user)
   // console.log($("#new").html())
@@ -31,6 +40,7 @@ socket.on('new',function(user){
   }, 5000);
 })
 
+// To get notified when someone disconnects
 socket.on('gone',function(user){
   $('#gone').html(user.name+" Disconnected!")
   $('#gone').show();
@@ -39,6 +49,7 @@ socket.on('gone',function(user){
   }, 5000);
 })
 
+// To show typing... when one's typing
 socket.on('typing',function(user){
   $('#typing').html(user.name+" is typing!")
   $('#typing').show();
@@ -102,7 +113,7 @@ class App extends React.Component {
           </React.Fragment>
             :
           <React.Fragment>
-            <ul id="recv"></ul>
+            <div id="recv"></div>
             <div>
               <h6 id="new" style={{color:"green",display:"none"}}>New user connected!</h6>
               <h6 id="gone" style={{color:"red",display:"none"}}>User Disconnected!</h6>

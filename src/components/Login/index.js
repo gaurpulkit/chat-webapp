@@ -27,7 +27,7 @@ export default class Login extends React.Component{
           <form>
               <div>
                   <h6>Username</h6>
-              <input id="send" autofocus="autofocus" value={this.state.value} onChange={this.handleChange} type="text" placeholder="Enter username..."/>
+              <input id="send" autoFocus="autofocus" value={this.state.value} onChange={this.handleChange} type="text" placeholder="Enter username..."/>
               </div>
             <button onClick={this.handleClick}>Submit</button>
           </form>
