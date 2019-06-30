@@ -1,8 +1,9 @@
 const http= require('http').createServer();
 const io=require('socket.io')(http);
+var userData=[]
 
 io.on('connection',function(socket){
-    io.emit('new');
+    console.log("New connection from socketId=",socket.id)
     socket.on('message',function(msg){
         io.emit('chat',msg)
     })
@@ -11,6 +12,10 @@ io.on('connection',function(socket){
     })
     socket.on('typing',function(){
         io.emit('typing')
+    })
+    socket.on('setUser',function(data){
+        userData.concat(data)
+        io.emit('new',data)
     })
 })
 
