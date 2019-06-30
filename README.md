@@ -12,7 +12,7 @@ You will also see any lint errors in the console.
 
 ### `npm run server`
 
-Runs the server on [http://localhost:4368]
+Runs the server on [http://localhost:4368](http://localhost:4368)
 
 ### `npm test`
 
