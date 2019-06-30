@@ -5,13 +5,15 @@ import { ChatBox } from './components/ChatBox';
 import  Header  from './components/Header';
 import  Login  from './components/Login';
 const io=require('socket.io-client')
-const socket=io.connect('localhost:4368')
+const socket=io.connect('192.168.43.13:4368')
 
 
 var timeOut;
 function send(message){
   // console.log("sent message")
-  socket.emit('message',message);
+  if (message.replace(/\s/g, '').length) {
+    socket.emit('message',message);
+  }
 }
 
 socket.on('chat', function(data){
